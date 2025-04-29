@@ -1,0 +1,50 @@
+import elAlambiqueViajero.*
+describe "testing" {
+  test "alambique veloz consume 10 de conbustible y pasa a tener 90" {
+    alambiqueVeloz.consumeCombustible(10)
+    assert.equals(90, alambiqueVeloz.combustible())
+  }
+  test "alambique veloz deja de ser rapido" {
+    alambiqueVeloz.dejaDeSerRapido()
+    assert.notThat(alambiqueVeloz.esRapido())
+  }
+  test "mate viene con yerba" {
+    assert.that(mate.vieneConYerba())
+  }
+  test "mate no viene con yerba" {
+    mate.cambiaPresidente()
+    assert.notThat(mate.vieneConYerba())
+  }
+  test "recuerdo de las vagas homenajeando a paris (torre eiffel)" {
+    lasVegas.homenajearACiudad(paris)
+    assert.equals(llaveroTorreEiffel, lasVegas.recuerdo())
+  }
+  test "recuerdo de las vegas homenajeando a buenos aires (mate con yerba)" {
+    lasVegas.homenajearACiudad(buenosAires)
+    assert.equals(true, lasVegas.recuerdo())
+  }
+  test "recuerdo de las vegas homenajeando a buenos aires (mate sin yerba)" {
+    mate.cambiaPresidente()
+    lasVegas.homenajearACiudad(buenosAires)
+    assert.equals(false, lasVegas.recuerdo())
+  }
+  test "alambique veloz puede llegar a paris con 100d de combustible" {
+    assert.that(paris.puedeLlegar(alambiqueVeloz))
+  }
+  test "alambique veloz puede llegar a paris con 10 de combustible" {
+    alambiqueVeloz.consumeCombustible(90)
+    assert.notThat(paris.puedeLlegar(alambiqueVeloz))
+  }
+  test "alambique veloz puede llegar a buenos aires siendo rapido" {
+    assert.that(buenosAires.puedeLlegar(alambiqueVeloz))
+  }
+  test "luke viaja a paris con alambique veloz y guarda el recuerdo de su ultimo viaje" {
+    luke.viajar(paris, alambiqueVeloz)
+    assert.equals(llaveroTorreEiffel, luke.recuerdoUltimoViaje())
+  }
+  test "luke viaja a paris y buenos aires y recuerda cuantos viajes hiso" {
+    luke.viajar(paris, alambiqueVeloz)
+    luke.viajar(buenosAires, alambiqueVeloz)
+    assert.equals(2, luke.cantidadDeLugaresQueVisito())
+  }
+}
