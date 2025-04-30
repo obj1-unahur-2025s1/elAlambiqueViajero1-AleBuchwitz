@@ -3,9 +3,11 @@ object luke {
     var cantLugaresQueVisito = 0
 
   method viajar(unDestino, vehiculo) {
-    recuerdoUltimoViaje = unDestino.recuerdo()
-    cantLugaresQueVisito = cantLugaresQueVisito + 1
-    vehiculo.consumeCombustible(10)
+    if(unDestino.puedeLlegar(vehiculo)){
+      recuerdoUltimoViaje = unDestino.recuerdo()
+      cantLugaresQueVisito = cantLugaresQueVisito + 1
+      vehiculo.consumeCombustible(10)
+    }
   }
   method recuerdoUltimoViaje() = recuerdoUltimoViaje
   method cantidadDeLugaresQueVisito() = cantLugaresQueVisito 
